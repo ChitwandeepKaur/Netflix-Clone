@@ -1,22 +1,50 @@
-import Input from "@/components/input";
-import { useCallback, useState } from "react";
+import Input                     from "@/components/input"
+import { useCallback, useState } from "react"
+import axios                     from 'axios'
+import { signIn }                from 'next-auth/react'
+import router                    from 'next/router'
 
 const Auth = () => {
+
   const [email, setEmail]       = useState(''),
-        [username, setUsername] = useState(''),
+        [name, setUsername] = useState(''),
         [password, setPassword] = useState(''),
         [variant, setVariant]   = useState('login')
 
   const toggleVariant = useCallback(() => {
     setVariant((currentVariant) => currentVariant === 'login' ? 'register' : 'login')
-},[])
+  },[])
+
+  const login = useCallback(async () => {
+    try {
+      await signIn('credentials', {
+        email, 
+        password,
+        redirect: false,
+        callbackUrl: '/'
+      })
+      router.push('/')
+    } catch ( error ) {
+      console.log(error)
+    }
+  }, [email, password])
+
+  const register = useCallback(async () => {
+    try {
+      await axios.post('/api/register', {
+        email, name, password
+      })
+      login()
+    } catch (error) {
+      console.log(error)
+    }
+  },[email, name, password, login])
+
   return (
-    // Refine the setting of this page - the main div is not centered
     <div className="relatice h-full w-full bg-[url('/images/landing_wallpaper.jpg')] bg-no-repeat bg-center bg-fixed bg-cover">
       <div className='bg-black w-full h-full lg:bg-opacity-50'>
         <nav>
           <img src="/images/netflix_logo.png" alt="Logo " className="h-20 pt-5 pl-5"/>
-          {/* Adress the Image tag warning */}
         </nav>
         <div className="flex justify-center">
           <div className="bg-black bg-opacity-70 px-16 py-16 self-center mt-2 lg:w-2/5 lg:max-w-md rounded-md w-full">
@@ -29,7 +57,7 @@ const Auth = () => {
                 label="Username" 
                 onChange={(e: any)=>{setUsername(e.target.value)}} 
                 type="text" 
-                value={username} 
+                value={name} 
                 id="Username"/>
               )}
               <Input 
@@ -45,7 +73,8 @@ const Auth = () => {
                     value={password} 
                     id="Password"/>
             </div>
-            <button className="bg-red-600 py-3 text-white mt-10 rounded-md w-full hover:bg-red-700 transition">
+            <button onClick={variant === 'login' ? login : register } 
+                   className="bg-red-600 py-3 text-white mt-10 rounded-md w-full hover:bg-red-700 transition">
               {variant === 'login' ? 'Login' : 'Sign up'}
             </button>  
             <p className="text-neutral-500 mt-10 text-sm">
