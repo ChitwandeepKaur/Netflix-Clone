@@ -1,13 +1,15 @@
-import Input                     from "@/components/input"
-import { useCallback, useState } from "react"
 import axios                     from 'axios'
-import { signIn }                from 'next-auth/react'
+import Input                     from "@/components/input"
 import router                    from 'next/router'
+import { FcGoogle }              from 'react-icons/fc'
+import { FaGithub }              from 'react-icons/fa'
+import { signIn }                from 'next-auth/react'
+import { useCallback, useState } from "react"
 
 const Auth = () => {
 
   const [email, setEmail]       = useState(''),
-        [name, setUsername] = useState(''),
+        [name, setName]         = useState(''),
         [password, setPassword] = useState(''),
         [variant, setVariant]   = useState('login')
 
@@ -47,7 +49,7 @@ const Auth = () => {
           <img src="/images/netflix_logo.png" alt="Logo " className="h-20 pt-5 pl-5"/>
         </nav>
         <div className="flex justify-center">
-          <div className="bg-black bg-opacity-70 px-16 py-16 self-center mt-2 lg:w-2/5 lg:max-w-md rounded-md w-full">
+          <div className="bg-black bg-opacity-70 px-14 py-14 self-center mt-2 lg:w-2/5 lg:max-w-md rounded-md w-full">
             <h2 className="text-white text-4xl mb-8 font-semibold ">
               {variant === 'login'? 'Sign in' : 'Register'}
             </h2>
@@ -55,7 +57,7 @@ const Auth = () => {
               {variant === 'register' && (
                 <Input 
                 label="Username" 
-                onChange={(e: any)=>{setUsername(e.target.value)}} 
+                onChange={(e: any)=>{setName(e.target.value)}} 
                 type="text" 
                 value={name} 
                 id="Username"/>
@@ -77,6 +79,18 @@ const Auth = () => {
                    className="bg-red-600 py-3 text-white mt-10 rounded-md w-full hover:bg-red-700 transition">
               {variant === 'login' ? 'Login' : 'Sign up'}
             </button>  
+            <div className="flex flex-row items-center gap-4 mt-8 justify-center">
+              <div onClick={()=>{
+                signIn('google', { callbackUrl: '/'})
+              }} className="w-30 h-10 bg-white rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition">
+                <FcGoogle size={30} className="ml-3"/><span className="text-xs p-2 text-center">Login with Google</span>
+              </div>
+              <div onClick={()=>{
+                signIn('github', { callbackUrl: '/'})
+              }} className="w-30 h-10 bg-white rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition">
+                <FaGithub size={30} className="ml-3"/><span className="text-xs p-2 text-center">Login with Github</span>
+              </div>
+            </div>
             <p className="text-neutral-500 mt-10 text-sm">
               {variant === 'login' ? 'First time using Netflix?' : 'Already have an account?'}
               <span onClick={toggleVariant} className="ml-1 text-white hover:underline cursor-pointer">

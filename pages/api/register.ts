@@ -1,6 +1,6 @@
 import bcrypt                              from 'bcrypt'
-import { NextApiResponse, NextApiRequest } from 'next'
 import prismadb                            from '@/lib/prismadb'
+import { NextApiResponse, NextApiRequest } from 'next'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if(req.method !== 'POST') return res.status(405).end()
