@@ -21,7 +21,7 @@ const Auth = () => {
       await signIn('credentials', {
         email, 
         password,
-        callbackUrl: '/profile'
+        callbackUrl: '/profiles'
       })
     } catch ( error ) {
       console.log(error)
@@ -77,12 +77,12 @@ const Auth = () => {
               {variant === 'login' ? 'Login' : 'Sign up'}
             </button>  
             <div className="flex flex-row items-center gap-4 mt-8 justify-center">
-              <div onClick={()=>signIn('google', { callbackUrl: '/profile'})} 
+              <div onClick={()=>signIn('google', { callbackUrl: '/profiles'})} 
               className="w-30 h-10 bg-white rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition">
                 <FcGoogle size={30} className="ml-3"/><span className="text-xs p-2 text-center">Login with Google</span>
               </div>
               <div onClick={()=>{
-                signIn('github', { callbackUrl: '/profile'})
+                signIn('github', { callbackUrl: '/profiles'})
               }} className="w-30 h-10 bg-white rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition">
                 <FaGithub size={30} className="ml-3"/><span className="text-xs p-2 text-center">Login with Github</span>
               </div>
