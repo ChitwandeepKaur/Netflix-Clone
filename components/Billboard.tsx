@@ -6,9 +6,9 @@ const Billboard = () => {
 
     const { data: randomMovie } = useBillboard()
     return (
-        <div className="relative h-[56.25vw]">
+        <div className="relative h-[75%]">
             <video 
-                className="w-full h-[75%] object-cover brightness-[60%]"
+                className="w-full h-[100%] object-cover brightness-[60%]"
                 autoPlay
                 muted
                 loop
