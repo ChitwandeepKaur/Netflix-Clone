@@ -9,7 +9,7 @@ const NavBar = () => {
 
     const [showMobileMenu, setShowMobileMenu]   = useState(false),
           [showAccountMenu, setShowAccountMenu] = useState(false),
-          [showBackground, setShowBackground]   = useState(false),
+          [showBackground, setShowBackground]   = useState(false)
 
     const toggleMobileMenu = useCallback(() => {
         setShowMobileMenu((current) => !current)
@@ -30,7 +30,7 @@ const NavBar = () => {
         return () => {
             window.removeEventListener('scroll', handleScroll)
         }
-        
+
     },[])
 
     return (
