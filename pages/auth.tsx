@@ -1,6 +1,5 @@
 import axios                     from 'axios'
 import Input                     from "@/components/input"
-import router                    from 'next/router'
 import { FcGoogle }              from 'react-icons/fc'
 import { FaGithub }              from 'react-icons/fa'
 import { signIn }                from 'next-auth/react'
@@ -22,10 +21,8 @@ const Auth = () => {
       await signIn('credentials', {
         email, 
         password,
-        redirect: false,
-        callbackUrl: '/'
+        callbackUrl: '/profile'
       })
-      router.push('/')
     } catch ( error ) {
       console.log(error)
     }
@@ -80,13 +77,12 @@ const Auth = () => {
               {variant === 'login' ? 'Login' : 'Sign up'}
             </button>  
             <div className="flex flex-row items-center gap-4 mt-8 justify-center">
-              <div onClick={()=>{
-                signIn('google', { callbackUrl: '/'})
-              }} className="w-30 h-10 bg-white rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition">
+              <div onClick={()=>signIn('google', { callbackUrl: '/profile'})} 
+              className="w-30 h-10 bg-white rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition">
                 <FcGoogle size={30} className="ml-3"/><span className="text-xs p-2 text-center">Login with Google</span>
               </div>
               <div onClick={()=>{
-                signIn('github', { callbackUrl: '/'})
+                signIn('github', { callbackUrl: '/profile'})
               }} className="w-30 h-10 bg-white rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition">
                 <FaGithub size={30} className="ml-3"/><span className="text-xs p-2 text-center">Login with Github</span>
               </div>
