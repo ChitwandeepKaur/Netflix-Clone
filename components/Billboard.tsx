@@ -1,5 +1,6 @@
 import useBillboard from "@/hooks/useBillboard"
 import React        from "react"
+import PlayButton   from "./PlayButton"
 import { AiOutlineInfoCircle } from 'react-icons/ai'
 
 const Billboard = () => {
@@ -12,8 +13,8 @@ const Billboard = () => {
                 autoPlay
                 muted
                 loop
-                src={randomMovie?.videoUrl} 
-                poster={randomMovie?.thumbnail}>
+                src   = {randomMovie?.videoUrl} 
+                poster= {randomMovie?.thumbnail}>
             </video>
             <div className="absolute top-[30%] md:top-[40%] ml-4 md:ml-16">
                 <p 
@@ -48,6 +49,7 @@ const Billboard = () => {
                     mt-3
                     md:mt-4
                     gap-3">
+                    <PlayButton movieId={randomMovie?.id}/>
                     <button className="
                         bg-white
                         text-white

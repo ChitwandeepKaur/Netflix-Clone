@@ -1,12 +1,14 @@
 import React              from 'react'
 import FavoriteButton     from './FavoriteButton'
 import { BsFillPlayFill } from 'react-icons/bs'
+import { useRouter }      from 'next/router'
 
 interface MovieCardProps {
   data : Record<string, any>
 }
 
 const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
+  const router = useRouter()
   return (
     <div className="group bg-zinc-900 col-span relative h-[12vw]">
       <img src={data.thumbnail} alt="Movie" className="
@@ -65,7 +67,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
                     flex-row
                     items-center
                     gap-3">
-                        <div onClick={()=>{}}
+                        <div onClick={ () => { router.push(`/watch/${data?.id}`)}}
                         className="
                             cursor-pointer
                             w-6
