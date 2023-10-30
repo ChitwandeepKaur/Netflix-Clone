@@ -1,8 +1,9 @@
 import React              from 'react'
+import FavoriteButton     from './FavoriteButton'
 import { BsFillPlayFill } from 'react-icons/bs'
 
 interface MovieCardProps {
-  data: Record<string, any>
+  data : Record<string, any>
 }
 
 const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
@@ -35,7 +36,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
         scale-0
         group-hover:scale-110
         group-hover:-translate-y-[6vw]
-        group-hover:translate-x-[2vw]
+        group-hover:-translate-x-[2vw]
         group-hover:opacity-100
       ">
             <img src={data.thumbnail} alt="Movie" className="
@@ -80,6 +81,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
                             hover:bg-neutral-300">
                             <BsFillPlayFill size={30}/>
                         </div>
+                        <FavoriteButton movieId={data?.id}/>
                 </div>
                 <p className="text-green-400 font-semibold mt-4">
                     New <span className="text-white">2023</span>
